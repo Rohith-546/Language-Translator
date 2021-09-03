@@ -3,6 +3,10 @@ from tkinter import messagebox
 import json
 import tkinter
 from tkinter import ttk
+from gtts import gTTS
+import playsound
+import glob, os, os.path
+import random
 
 
 def trans():
@@ -16,7 +20,36 @@ def trans():
             output_text.delete(1.0, 'end-1c')
             if str(result.pronunciation) != "None":
                 output_text.insert("end-1c", f"{result.text}\n\n\nPronunciation:\n{result.pronunciation}")
+
+                def play():
+                    my_text = result.pronunciation
+                    language = lang_code
+                    obj = gTTS(text=my_text, lang=language, slow=False)
+                    mf = str("hello" + str(random.randint(1, 1000)) + ".mp3")
+                    obj.save(mf)
+                    playsound.playsound(mf)
+                    os.remove(mf)
+                    file_list = glob.glob(
+                        os.path.join(r"C:\Users\windows\Desktop\Projects\Language Translator", "*.mp3"))
+                    for fl in file_list:
+                        os.remove(fl)
+                pronounce = tkinter.Button(text="Pronunciation", bg="#FACE0F", command=play)
+                pronounce.grid(column=2, row=2)
             else:
+                def play():
+                    my_text = result.text
+                    language = 'en'
+                    obj = gTTS(text=my_text, lang=language, slow=False)
+                    mf = str("hello" + str(random.randint(1, 1000)) + ".mp3")
+                    obj.save(mf)
+                    playsound.playsound(mf)
+                    os.remove(mf)
+                    file_list = glob.glob(
+                        os.path.join(r"C:\Users\windows\Desktop\Projects\Language Translator", "*.mp3"))
+                    for fl in file_list:
+                        os.remove(fl)
+                pronounce = tkinter.Button(text="Pronunciation", bg="#FACE0F", command=play)
+                pronounce.grid(column=2, row=2)
                 output_text.insert("end-1c", f"{result.text}")
         else:
             messagebox.showinfo(title='oops!', message='Please select a language to translate')
@@ -57,10 +90,9 @@ input_text.grid(column=0, row=1)
 input_text.config(padx=10, pady=10, font=('Roboto', 18))
 output_text = tkinter.Text(window, width=30, height=8)
 output_text.grid(column=2, row=1)
-output_text.config(padx=10, pady=10, font=('Roboto', 18))
+output_text.config(padx=10, pady=10, font=('Roboto', 16))
 
 # button
-button = tkinter.Button(text="Translate", bg="#FACE7F", command=trans)
+button = tkinter.Button(text="Translate", bg="#FACE0F", command=trans)
 button.grid(column=1, row=1, padx=10)
-
 window.mainloop()
