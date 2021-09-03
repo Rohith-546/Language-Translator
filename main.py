@@ -33,8 +33,9 @@ def trans():
                     obj.save(mf)
                     playsound.playsound(mf)
                     os.remove(mf)
+                    ap = os.path.abspath("")
                     file_list = glob.glob(
-                        os.path.join(r"C:\Users\windows\Desktop\Projects\Language Translator", "*.mp3"))
+                        os.path.join(ap, "*.mp3"))
                     for fl in file_list:
                         os.remove(fl)
                 my_font = font.Font(size=20)
@@ -44,14 +45,15 @@ def trans():
             else:
                 def play():
                     my_text = result.text
-                    language = 'en'
+                    language = lang_code
                     obj = gTTS(text=my_text, lang=language, slow=False)
                     mf = str("hello" + str(random.randint(1, 1000)) + ".mp3")
                     obj.save(mf)
                     playsound.playsound(mf)
                     os.remove(mf)
+                    ap = os.path.abspath("")
                     file_list = glob.glob(
-                        os.path.join(r"C:\Users\windows\Desktop\Projects\Language Translator", "*.mp3"))
+                        os.path.join(ap, "*.mp3"))
                     for fl in file_list:
                         os.remove(fl)
                 my_font = font.Font(size=20)
