@@ -1,12 +1,16 @@
-from googletrans import Translator
-from tkinter import messagebox
+import glob
 import json
-import tkinter
-from tkinter import ttk
-from gtts import gTTS
-import playsound
-import glob, os, os.path
+import os
+import os.path
 import random
+import tkinter
+from tkinter import messagebox
+from tkinter import ttk
+from tkinter import *
+import playsound
+from googletrans import Translator
+from gtts import gTTS
+from tkinter import font
 
 
 def trans():
@@ -33,7 +37,9 @@ def trans():
                         os.path.join(r"C:\Users\windows\Desktop\Projects\Language Translator", "*.mp3"))
                     for fl in file_list:
                         os.remove(fl)
-                pronounce = tkinter.Button(text="Pronunciation", bg="#FACE0F", command=play)
+                my_font = font.Font(size=20)
+                pronounce = Button(text="🔊", width=5, bg="#FFE194", command=play)
+                pronounce['font'] = my_font
                 pronounce.grid(column=2, row=2)
             else:
                 def play():
@@ -48,7 +54,9 @@ def trans():
                         os.path.join(r"C:\Users\windows\Desktop\Projects\Language Translator", "*.mp3"))
                     for fl in file_list:
                         os.remove(fl)
-                pronounce = tkinter.Button(text="Pronunciation", bg="#FACE0F", command=play)
+                my_font = font.Font(size=20)
+                pronounce = Button(text="🔊", width=5, bg="#FFE194", command=play)
+                pronounce['font'] = my_font
                 pronounce.grid(column=2, row=2)
                 output_text.insert("end-1c", f"{result.text}")
         else:
@@ -87,12 +95,13 @@ question_menu.grid(column=2, row=0)
 # text area
 input_text = tkinter.Text(window, width=30, height=8)
 input_text.grid(column=0, row=1)
-input_text.config(padx=10, pady=10, font=('Roboto', 18))
+input_text.config(padx=10, pady=10, font=('Roboto', 16))
 output_text = tkinter.Text(window, width=30, height=8)
 output_text.grid(column=2, row=1)
 output_text.config(padx=10, pady=10, font=('Roboto', 16))
 
 # button
-button = tkinter.Button(text="Translate", bg="#FACE0F", command=trans)
+button = tkinter.Button(text="Translate", width=9, bg="#FACE0F", command=trans)
 button.grid(column=1, row=1, padx=10)
+
 window.mainloop()
